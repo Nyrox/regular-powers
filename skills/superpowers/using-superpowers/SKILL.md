@@ -1,0 +1,68 @@
+---
+name: using-superpowers
+description: "Opt-in, subagent-driven software development workflow (design → plan → subagent implementation → operator QA → merge). Use ONLY when the operator explicitly asks for it — e.g. 'use superpowers', 'run the workflow', 'brainstorm and build this properly', or /skill:superpowers. Never engage automatically for ordinary coding requests."
+---
+
+# superpowers
+
+A structured development methodology, adapted from obra/superpowers. Unlike
+upstream superpowers, **this workflow is never mandatory and never
+auto-engages.** Use it only when the operator asks for it.
+
+## When to Use
+
+Engage this workflow ONLY when the operator requests it:
+
+- "use superpowers", "run the workflow", "brainstorm this and build it properly"
+- an explicit `/skill:superpowers` (or `/skill:brainstorming`, etc.) invocation
+- a clear request to follow the design → plan → subagent-implementation → QA process
+
+If the operator just asks you to write or fix some code without invoking the
+workflow, **do the normal thing.** Do not announce skills, do not force
+brainstorming, do not build plan documents. This is the core difference from
+upstream superpowers: the ceremony is opt-in.
+
+## The Flow
+
+Once invoked, the workflow runs these phases in order. Each phase is its own
+skill — read that skill's `SKILL.md` when you reach it.
+
+1. **Design** — `../brainstorming/SKILL.md`. Refine the idea into a clear design.
+   The target is **no open questions** — keep going until the design is
+   unambiguous. Produces a design document.
+2. **Plan** — `../writing-plans/SKILL.md`. Turn the approved design into a
+   bite-sized, TDD implementation plan.
+3. **Implement** — `../subagent-driven-development/SKILL.md`. Dispatch a fresh
+   implementer subagent per task with two-stage review. **This is the only
+   execution mode** — there is no inline/batch alternative.
+4. **QA + Merge** — `../finishing-a-development-branch/SKILL.md`. Do NOT assume
+   the task is done when implementation finishes. Enter an operator QA cycle;
+   apply requested changes as fixup commits; merge (autosquashing fixups) only
+   after the operator explicitly approves.
+
+Supporting skills used within these phases: `test-driven-development`,
+`using-git-worktrees`, `requesting-code-review`, `receiving-code-review`,
+`systematic-debugging`, `verification-before-completion`.
+
+## Document Storage (commit vs. scratch)
+
+Design docs and implementation plans are stored one of two ways, decided per
+repo by whether a committed `docs/superpowers/` directory exists. Resolve it
+once with the shared script and reuse the result across phases:
+
+```bash
+../scripts/sp-workspace   # prints "commit <dir>" or "scratch <dir>"
+```
+
+- **Commit mode** (`docs/superpowers/` exists in the repo): write the design to
+  `docs/superpowers/specs/` and the plan to `docs/superpowers/plans/`. Do NOT
+  commit them separately — commit the design **and** the plan together in a
+  **single commit** once the plan is written.
+- **Scratch mode** (no `docs/superpowers/`): write the design and plan to the
+  throwaway directory the script prints (under `$TMPDIR`). **Never commit
+  these.** Tell the operator where they are and that they are session scratch —
+  they are not expected to outlive the session.
+
+The SDD progress ledger, task briefs, and review packages always live in
+git-ignored scratch (`.superpowers/sdd/`) regardless of mode — that is
+separate from design/plan storage.
