@@ -47,6 +47,8 @@ Dispatch a subagent, filling the template at [code-reviewer.md](code-reviewer.md
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
 
+Use superpowersreceiving-code-review skill when implementing review feedback.
+
 ## Common Rationalizations
 
 | Excuse | Reality |

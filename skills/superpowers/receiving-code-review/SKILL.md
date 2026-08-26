@@ -1,6 +1,6 @@
 ---
 name: receiving-code-review
-description: "How to receive code-review or QA feedback within the opt-in superpowers workflow. Use during the operator QA cycle or when the operator/an external reviewer gives feedback, especially if it seems unclear or technically questionable. Requires verification, not performative agreement or blind implementation."
+description: "How to receive code-review or QA feedback within the superpowers workflow. Use during the operator QA cycle or when the operator/an external reviewer gives feedback, especially if it seems unclear or technically questionable. Requires verification, not performative agreement or blind implementation."
 ---
 
 # Code Review Reception
@@ -106,8 +106,10 @@ FOR multi-item feedback:
   4. Verify no regressions
 ```
 
-Within the superpowers QA cycle, commit each fix as a `fixup!` commit targeting
+Within the superpowers QA cycle or when asked directly by the operator to do a review of the current branch or changeset, commit each fix as a `fixup!` commit targeting
 the original commit when possible (see finishing-a-development-branch).
+
+If the changes you were asked to review are uncommited and you are not within a superpowers workflow, ask the operator before committing anything.
 
 ## When To Push Back
 
