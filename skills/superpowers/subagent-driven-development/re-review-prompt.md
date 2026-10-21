@@ -19,7 +19,9 @@ Subagent (general-purpose):
 
     ## The Task
 
-    Read the task brief: [BRIEF_FILE]
+    The task is **Task N** in the design doc: [DESIGN_FILE]
+    Read the task and the Global Constraints for context; your scope is
+    still only the findings and the fix diff.
 
     ## The Findings Under Verification
 
@@ -103,13 +105,14 @@ Subagent (general-purpose):
 **Placeholders:**
 - `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection; scoped
   re-reviews of small fix diffs take a cheap-to-mid tier
-- `[BRIEF_FILE]` — the task brief file (same file the implementer worked from)
+- `[DESIGN_FILE]` — the design doc path (same file the implementer worked from)
+- `N` — the task number(s) under re-review
 - `[FINDINGS]` — the Critical/Important findings and spec gaps from the
   previous review, copied verbatim, one per bullet
 - `[REPORT_FILE]` — the implementer's report file (fix reports appended)
 - `[FIX_BASE_SHA]` — the head the previous review saw
 - `[HEAD_SHA]` — current commit
-- `[DIFF_FILE]` — the path `scripts/review-package PLAN_FILE FIX_BASE HEAD` printed
+- `[DIFF_FILE]` — the path `scripts/review-package DESIGN_FILE FIX_BASE HEAD` printed
 
 **Re-reviewer returns:** per-finding verdicts (ADDRESSED / NOT ADDRESSED),
 new breakage in the fix diff, out-of-scope observations, and a round verdict.

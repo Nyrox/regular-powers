@@ -37,7 +37,7 @@ Dispatch a subagent, filling the template at [code-reviewer.md](code-reviewer.md
 
 **Placeholders:**
 - `{DESCRIPTION}` - Brief summary of what you built
-- `{PLAN_OR_REQUIREMENTS}` - What it should do
+- `{REQUIREMENTS}` - What it should do (design doc path, task, or requirements)
 - `{BASE_SHA}` - Starting commit
 - `{HEAD_SHA}` - Ending commit
 
@@ -47,7 +47,7 @@ Dispatch a subagent, filling the template at [code-reviewer.md](code-reviewer.md
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
 
-Use superpowersreceiving-code-review skill when implementing review feedback.
+Use superpowers:receiving-code-review skill when implementing review feedback.
 
 ## Common Rationalizations
 

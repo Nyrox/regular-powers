@@ -10,15 +10,15 @@ Subagent (general-purpose):
   prompt: |
     You are a Senior Code Reviewer with expertise in software architecture,
     design patterns, and best practices. Your job is to review completed work
-    against its plan or requirements and identify issues before they cascade.
+    against its design or requirements and identify issues before they cascade.
 
     ## What Was Implemented
 
     [DESCRIPTION]
 
-    ## Requirements / Plan
+    ## Requirements / Design
 
-    [PLAN_OR_REQUIREMENTS]
+    [REQUIREMENTS]
 
     ## Git Range to Review
 
@@ -45,10 +45,10 @@ Subagent (general-purpose):
 
     ## What to Check
 
-    **Plan alignment:**
-    - Does the implementation match the plan / requirements?
+    **Requirements alignment:**
+    - Does the implementation match the design / requirements?
     - Are deviations justified improvements, or problematic departures?
-    - Is all planned functionality present?
+    - Is all required functionality present?
 
     **Code quality:**
     - Clean separation of concerns?
@@ -81,9 +81,9 @@ Subagent (general-purpose):
     Acknowledge what was done well before listing issues — accurate praise
     helps the implementer trust the rest of the feedback.
 
-    If you find significant deviations from the plan, flag them specifically
+    If you find significant deviations from the design, flag them specifically
     so the implementer can confirm whether the deviation was intentional.
-    If you find issues with the plan itself rather than the implementation,
+    If you find issues with the design itself rather than the implementation,
     say so.
 
     ## Output Format
@@ -136,7 +136,7 @@ Subagent (general-purpose):
 
 **Placeholders:**
 - `[DESCRIPTION]` — brief summary of what was built
-- `[PLAN_OR_REQUIREMENTS]` — what it should do (plan file path, task text, or requirements)
+- `[REQUIREMENTS]` — what it should do (design doc path, task number, or requirements)
 - `[BASE_SHA]` — starting commit
 - `[HEAD_SHA]` — ending commit
 

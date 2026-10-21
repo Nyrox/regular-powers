@@ -20,10 +20,16 @@ Subagent (general-purpose):
 
     ## What Was Requested
 
-    Read the task brief: [BRIEF_FILE]
+    Read the design doc: [DESIGN_FILE]
+    The task under review is **Task N** in its Tasks section. Its "Done when"
+    criteria, the design sections it delivers, and the Global Constraints
+    are the requirements. The design says what to build, not how: the
+    implementer chose the files, functions, and tests, and those choices
+    are judged on quality, not against a prescribed layout.
 
-    Global constraints from the spec/design that bind this task:
-    [GLOBAL_CONSTRAINTS]
+    Rulings the controller gave the implementer for this task (these
+    override the design text where they conflict):
+    [RULINGS]
 
     ## What the Implementer Claims They Built
 
@@ -102,11 +108,10 @@ Subagent (general-purpose):
     - **Misunderstood:** right feature built the wrong way, wrong problem
       solved
 
-    If the brief lists several files each with its own change (a batched
-    dispatch), check the diff against that list file by file: every listed
-    file must have its corresponding hunk. A listed file the diff never
-    touches is a Missing finding, no matter how clean the rest of the
-    batch looks.
+    If several tasks are under review (a batched dispatch), check the diff
+    against each task's "Done when" criteria task by task. A task with no
+    corresponding change is a Missing finding, no matter how clean the
+    rest of the batch looks.
 
     If a requirement cannot be verified from this diff alone (it lives in
     unchanged code or spans tasks), report it as a ⚠️ item instead of
@@ -127,7 +132,8 @@ Subagent (general-purpose):
     **Structure:**
     - Does each file have one clear responsibility with a well-defined interface?
     - Are units decomposed so they can be understood and tested independently?
-    - Is the implementation following the file structure from the plan?
+    - Does the implementation respect the unit boundaries and interfaces
+      the design defines, and follow the codebase's existing patterns?
     - Did this change create new files that are already large, or
       significantly grow existing files? (Don't flag pre-existing file
       sizes — focus on what this change contributed.)
@@ -150,11 +156,10 @@ Subagent (general-purpose):
     would block a merge over — verbatim duplication of a logic block,
     swallowed errors, tests that assert nothing. "Coverage could be broader"
     and polish suggestions are Minor.
-    If the plan or brief explicitly mandates something this rubric calls a
-    defect (a test that asserts nothing, verbatim duplication of a logic
-    block), that IS a finding — report it as Important, labeled
-    plan-mandated. The plan's authorship does not grade its own work; the
-    human decides.
+    If the design or a ruling explicitly mandates something this rubric
+    calls a defect, that IS a finding — report it as Important, labeled
+    design-mandated. The design's authorship does not grade its own work;
+    the controller rules on it.
     Acknowledge what was done well before listing issues — accurate praise
     helps the implementer trust the rest of the feedback.
 
@@ -189,18 +194,17 @@ Subagent (general-purpose):
 
 **Placeholders:**
 - `[MODEL]` — REQUIRED: reviewer model per SKILL.md Model Selection
-- `[BRIEF_FILE]` — REQUIRED: the task brief file (`scripts/task-brief PLAN N`
-  prints the path; same file the implementer worked from)
-- `[GLOBAL_CONSTRAINTS]` — the binding requirements copied verbatim from
-  the plan's Global Constraints section or the spec: exact values, formats,
-  and stated relationships between components (not process rules — those
-  are already in this template)
+- `[DESIGN_FILE]` — REQUIRED: the design doc path (same file the implementer
+  worked from)
+- `N` — REQUIRED: the task number(s) under review
+- `[RULINGS]` — the rulings you gave the implementer for this task, verbatim;
+  "None" if none
 - `[REPORT_FILE]` — REQUIRED: the file the implementer wrote its detailed
   report to
 - `[BASE_SHA]` — commit before this task
 - `[HEAD_SHA]` — current commit
 - `[DIFF_FILE]` — REQUIRED: the path the controller wrote the review
-  package to (`scripts/review-package PLAN_FILE BASE HEAD` prints the unique
+  package to (`scripts/review-package DESIGN_FILE BASE HEAD` prints the unique
   path it wrote; the package never enters the controller's context)
 
 **Reviewer returns:** Spec Compliance verdict (✅/❌/⚠️), Strengths, Issues

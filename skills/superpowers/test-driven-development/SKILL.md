@@ -1,6 +1,6 @@
 ---
 name: test-driven-development
-description: "TDD red-green-refactor discipline within the opt-in superpowers workflow. Use when invoked by another superpowers skill (writing-plans, subagent-driven-development, finishing) or when the operator explicitly asks for test-driven development. Not applied automatically to ordinary edits."
+description: "TDD red-green-refactor discipline within the opt-in superpowers workflow. Use when invoked by another superpowers skill (subagent-driven-development, finishing) or when the operator explicitly asks for test-driven development. Not applied automatically to ordinary edits."
 ---
 
 # Test-Driven Development (TDD)

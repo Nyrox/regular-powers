@@ -100,8 +100,8 @@ explicit approval ends the QA cycle.
 
 ### 5a. Confirm the base branch
 
-The base is whatever this work forked from — usually named in the plan or the
-branch's upstream. If not already known, ask:
+The base is whatever this work forked from — usually the branch the worktree
+was created from, or the branch's upstream. If not already known, ask:
 "This branch split from <best guess> — correct?" Merging into the wrong base is
 expensive to undo.
 
@@ -202,8 +202,8 @@ Step 2 values.
   commit / move / delete them, then remove.
 - **Otherwise:** the host owns this workspace — leave it in place.
 
-Also remember: in scratch mode the design doc and plan live in `$TMPDIR` and are
-never committed — leave them; they are session scratch.
+Also remember: in scratch mode the design doc lives in `$TMPDIR` and is never
+committed — leave it; it is session scratch.
 
 ## If the operator asks to discard the work
 

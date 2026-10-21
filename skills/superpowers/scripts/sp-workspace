@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# Resolve where this custom-superpowers run keeps its design docs and plans.
+# Resolve where this custom-superpowers run keeps its design docs.
 #
 # Rule (set by the operator):
 #   - If the target repo contains a committed `docs/superpowers` directory,
-#     we are in COMMIT MODE: design docs and plans live under version control
-#     and get committed together in a single commit.
-#   - Otherwise we are in SCRATCH MODE: docs and plans go to a throwaway
+#     we are in COMMIT MODE: design docs live under version control and get
+#     committed once approved.
+#   - Otherwise we are in SCRATCH MODE: design docs go to a throwaway
 #     directory under $TMPDIR that is NOT expected to outlive the session.
 #
 # Output (one line):
 #   commit  <repo-root>/docs/superpowers
 #   scratch <tmpdir>/superpowers/<sanitized-repo>
 #
-# The printed base directory always has `specs/` and `plans/` subdirs ready.
+# The printed base directory always has a `specs/` subdir ready.
 #
 # Usage: sp-workspace
 set -euo pipefail
@@ -25,14 +25,14 @@ fi
 
 if [ -d "$root/docs/superpowers" ]; then
   base="$root/docs/superpowers"
-  mkdir -p "$base/specs" "$base/plans"
+  mkdir -p "$base/specs"
   printf 'commit %s\n' "$base"
   exit 0
 fi
 
-# Scratch mode: deterministic per-repo path so both brainstorming and
-# writing-plans resolve to the same place within a session.
+# Scratch mode: deterministic per-repo path so every phase resolves to the
+# same place within a session.
 sanitized=$(printf '%s' "$root" | tr -c 'A-Za-z0-9._-' '_' )
 base="${TMPDIR:-/tmp}/superpowers/${sanitized}"
-mkdir -p "$base/specs" "$base/plans"
+mkdir -p "$base/specs"
 printf 'scratch %s\n' "$base"

@@ -12,12 +12,21 @@ Subagent (general-purpose):
 
     ## Task Description
 
-    Read your task brief first: [BRIEF_FILE]
-    It contains the full task text from the plan.
+    Read the design doc first: [DESIGN_FILE]
+    Your task is **Task N** in its Tasks section. Read the whole document —
+    the rest of the design is the context your task fits into, and its
+    Global Constraints bind your task. Use exact values from it verbatim.
 
-    ## Context
+    The design says what to build, not how. Deciding how — which files,
+    functions, and tests — is your job, done against the real codebase.
+    Earlier tasks are already committed: read the code and `git log` to see
+    how they landed.
 
-    [Scene-setting: where this fits, dependencies, architectural context]
+    ## Rulings From the Controller
+
+    [RULINGS — decisions that change or clarify this task, verbatim; "None" if none]
+
+    These override the design text where they conflict.
 
     ## Before You Begin
 
@@ -32,10 +41,12 @@ Subagent (general-purpose):
     ## Your Job
 
     Once you're clear on requirements:
-    1. Implement exactly what the task specifies
-    2. Write tests (following TDD if task says to)
-    3. Verify implementation works
-    4. Commit your work
+    1. Explore the code your task touches and decide how to build it
+    2. Implement exactly what the task specifies, test-first: write a
+       failing test, run it and watch it fail, write the minimal code to
+       pass, run it and watch it pass
+    3. Verify the task's "Done when" criteria all hold
+    4. Commit your work (small, focused commits)
     5. Self-review (see below)
     6. Report back
 
@@ -63,10 +74,9 @@ Subagent (general-purpose):
 
     You reason best about code you can hold in context at once, and your edits are more
     reliable when files are focused. Keep this in mind:
-    - Follow the file structure defined in the plan
+    - Respect the unit boundaries and interfaces the design defines
     - Each file should have one clear responsibility with a well-defined interface
-    - If a file you're creating is growing beyond the plan's intent, stop and report
-      it as DONE_WITH_CONCERNS — don't split files on your own without plan guidance
+    - Prefer smaller, focused files; files that change together live together
     - If an existing file you're modifying is already large or tangled, work carefully
       and note it as a concern in your report
     - In existing codebases, follow established patterns. Improve code you're touching
@@ -77,11 +87,16 @@ Subagent (general-purpose):
     It is always OK to stop and say "this is too hard for me." Bad work is worse than
     no work. You will not be penalized for escalating.
 
+    Implementation decisions inside your task are yours to make — that is
+    not a reason to escalate. Design-level decisions are not yours.
+
     **STOP and escalate when:**
-    - The task requires architectural decisions with multiple valid approaches
-    - You need to understand code beyond what was provided and can't find clarity
+    - The task needs a decision that would change the design: an interface
+      between units, externally visible behavior, or anything another task
+      depends on, with multiple valid answers the design doesn't settle
+    - The design contradicts itself or the codebase in a way that blocks you
     - You feel uncertain about whether your approach is correct
-    - The task involves restructuring existing code in ways the plan didn't anticipate
+    - The task involves restructuring existing code in ways the design didn't anticipate
     - You've been reading file after file trying to understand the system without progress
 
     **How to escalate:** Report back with status BLOCKED or NEEDS_CONTEXT. Describe
@@ -94,8 +109,8 @@ Subagent (general-purpose):
     Review your work with fresh eyes. Ask yourself:
 
     **Completeness:**
-    - Did I fully implement everything in the spec?
-    - Did I miss any requirements?
+    - Does every "Done when" criterion of my task hold?
+    - Did I miss any requirements or Global Constraints?
     - Are there edge cases I didn't handle?
 
     **Quality:**
@@ -110,7 +125,7 @@ Subagent (general-purpose):
 
     **Testing:**
     - Do tests actually verify behavior (not just mock behavior)?
-    - Did I follow TDD if required?
+    - Did I write each test first and watch it fail?
     - Are tests comprehensive?
     - Is the test output pristine (no stray warnings or noise)?
 
@@ -129,8 +144,9 @@ Subagent (general-purpose):
 
     Write your full report to [REPORT_FILE]:
     - What you implemented (or what you attempted, if blocked)
+    - Implementation decisions you made that later tasks or reviewers should know
     - What you tested and test results
-    - **TDD Evidence** (if TDD was required for this task):
+    - **TDD Evidence:**
       - RED: command run, relevant failing output before implementation, and why the failure was expected
       - GREEN: command run and relevant passing output after implementation
     - Files changed

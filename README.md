@@ -7,7 +7,8 @@ superpowers, but adapted to people who wish to keep their brain enabled while cl
 
 - Agents are no longer instructed to use skills unprompted and for everything. Invoke regular-powers only when you tell the agent to.
 - A dedicated QA phase is added after finishing a implementation to do manual verification and code review. The agent performs bugfixes and suggested improvements as fixup commits and squashes them down before finishing the branch.
-- Specs and implementation plans are no longer commited to every repo. Only when the superpowers directory exists and both are written in one commit, otherwise the agent writes plans to a scratch directory.
+- No implementation plans. The design doc ends in a high-level numbered task list; subagent-driven development dispatches each implementer with just the design doc and a task number, and implementers own all implementation decisions.
+- Design docs are no longer commited to every repo. Only when the superpowers directory exists, otherwise the agent writes them to a scratch directory.
 - All skills have been simplified and slimmed down.
 
 ## Compatibility
